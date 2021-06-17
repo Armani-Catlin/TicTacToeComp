@@ -1,30 +1,4 @@
 public class Game {
-
-    private final char[][] board = {
-            {' ','|',' ','|',' '},
-            {'-','+','-','+','-'},
-            {' ','|',' ','|',' '},
-            {'-','+','-','+','-'},
-            {' ','|',' ','|',' '}
-    };
-
-    private final char[] placements = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
-
-    public String[] winningPositions = new String[8];
-
-    private char winner;
-
-    private void updateWinningPositions() {
-        winningPositions[0] = "" + this.placements[0] + this.placements[1] + this.placements[2];
-        winningPositions[1] = "" + this.placements[3] + this.placements[4] + this.placements[5];
-        winningPositions[2] = "" + this.placements[6] + this.placements[7] + this.placements[8];
-        winningPositions[3] = "" + this.placements[0] + this.placements[3] + this.placements[6];
-        winningPositions[4] = "" + this.placements[1] + this.placements[4] + this.placements[7];
-        winningPositions[5] = "" + this.placements[2] + this.placements[5] + this.placements[8];
-        winningPositions[6] = "" + this.placements[0] + this.placements[4] + this.placements[8];
-        winningPositions[7] = "" + this.placements[6] + this.placements[4] + this.placements[2];
-    }
-
     public char[][] getBoard() {
         return this.board;
     }
@@ -37,12 +11,34 @@ public class Game {
         return this.placements;
     }
 
+    public void setWinner(String winner) {
+        this.winner = winner.charAt(0);
+    }
+    private final char[][] board = {
+            {' ','|',' ','|',' '},
+            {'-','+','-','+','-'},
+            {' ','|',' ','|',' '},
+            {'-','+','-','+','-'},
+            {' ','|',' ','|',' '}
+    };
+    private final char[] placements = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
+    public String[] winningPositions = new String[8];
+    private char winner;
+    private void updateWinningPositions() {
+        winningPositions[0] = "" + this.placements[0] + this.placements[1] + this.placements[2];
+        winningPositions[1] = "" + this.placements[3] + this.placements[4] + this.placements[5];
+        winningPositions[2] = "" + this.placements[6] + this.placements[7] + this.placements[8];
+        winningPositions[3] = "" + this.placements[0] + this.placements[3] + this.placements[6];
+        winningPositions[4] = "" + this.placements[1] + this.placements[4] + this.placements[7];
+        winningPositions[5] = "" + this.placements[2] + this.placements[5] + this.placements[8];
+        winningPositions[6] = "" + this.placements[0] + this.placements[4] + this.placements[8];
+        winningPositions[7] = "" + this.placements[6] + this.placements[4] + this.placements[2];
+    }
+
     public boolean isWon() {
-
         updateWinningPositions();
-
         for(String position : winningPositions) {
-            if( isPositionWon(position) ) {
+            if(isPositionWon(position)) {
                 setWinner(position);
                 return true;
             }
@@ -52,10 +48,6 @@ public class Game {
 
     private static boolean isPositionWon(String position) {
         return position.equals("XXX") || position.equals("OOO");
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner.charAt(0);
     }
 
     public void printBoard() {
@@ -100,6 +92,7 @@ public class Game {
     public void placeUserPosition(int position, char XorO) {
         this.placements[position-1] = XorO;
     }
+
     public void placeComputerPosition(int position, char XorO) {
         this.placements[position] = XorO;
     }
